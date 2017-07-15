@@ -1,0 +1,39 @@
+{
+	"name": "wp-kit/core",
+	"description": "The Core Loader of WPKit Components for Themosis",
+	"keywords": ["wordpress", "framework", "oop", "wp kit", "themosis"],
+	"homepage" : "https://github.com/wp-kit/core",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Creative Little Dots",
+			"email" : "tech@creativelittledots.co.uk",
+			"homepage" : "https://creativelittledots.co.uk/",
+			"role" : "Developers"
+		}
+	],
+	"require": {
+        "php": ">=5.6.4",
+        "wp-kit/registry": "dev-master",
+        "wp-kit/invoker": "dev-master",
+        "wp-kit/notifications": "dev-master",
+        "wp-kit/hashing": "dev-master",
+        "wp-kit/acf-integration": "dev-master",
+        "wp-kit/tgmpa-integration": "dev-master",
+        "wp-kit/vc-integration": "dev-master"
+    },
+	"type": "library",
+	"autoload": {
+        "files": [
+            "helpers.php"
+        ]
+    },
+    "config": {
+		"preferred-install": "dist"
+	},
+	"minimum-stability": "dev",
+	"repositories": [
+	],
+	"scripts": {
+	}
+}
