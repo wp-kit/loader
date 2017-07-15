@@ -1,6 +1,6 @@
 {
-	"name": "wp-kit/core",
-	"description": "The Core Loader of WPKit Components for Themosis",
+	"name": "wp-kit/loader",
+	"description": "The core loader of WPKit components for Themosis",
 	"keywords": ["wordpress", "framework", "oop", "wp kit", "themosis"],
 	"homepage" : "https://github.com/wp-kit/core",
 	"license": "MIT",
