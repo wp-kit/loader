@@ -1,6 +1,6 @@
 {
-	"name": "wp-kit/loader",
-	"description": "The core loader of WPKit components for Themosis",
+	"name": "wp-kit/utils",
+	"description": "A set of utilities for WPKit components",
 	"keywords": ["wordpress", "framework", "oop", "wp kit", "themosis"],
 	"homepage" : "https://github.com/wp-kit/core",
 	"license": "MIT",
@@ -14,13 +14,7 @@
 	],
 	"require": {
         "php": ">=5.6.4",
-        "wp-kit/registry": "dev-master",
-        "wp-kit/invoker": "dev-master",
-        "wp-kit/notifications": "dev-master",
-        "wp-kit/hashing": "dev-master",
-        "wp-kit/acf-integration": "dev-master",
-        "wp-kit/tgmpa-integration": "dev-master",
-        "wp-kit/vc-integration": "dev-master"
+        "wp-kit/registry": "dev-master"
     },
 	"type": "library",
 	"autoload": {
