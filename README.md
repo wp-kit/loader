@@ -16,8 +16,6 @@ composer require "wp-kit/utils"
 
 Wordpress 4+
 
-Themosis 1.3+
-
 PHP 5.6+
 
 ## License
