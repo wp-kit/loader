@@ -6,7 +6,7 @@ There is nothing on the branch other than a helper file and composer file for wp
 
 ## Installation
 
-From the root of your ```Themosis``` installation or in your ```composer``` driven theme folder, install ```wp-kit/utils``` via composer:
+From the root of your ```Themosis``` installation or in your ```Composer``` driven theme folder, install ```wp-kit/utils``` using the follow command:
 
 ```php
 composer require "wp-kit/utils"
