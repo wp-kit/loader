@@ -1,6 +1,6 @@
 <?php
 
-	use Illuminate\Container\Container;
+	use WPKit\Foundation\Application;
 	use Illuminate\Support\Facades\Input;
 
 	if( ! defined( 'DS' ) ) {
@@ -26,9 +26,9 @@
 	    function app($abstract = null, array $parameters = [])
 	    {
 	        if (is_null($abstract)) {
-	            return Container::getInstance();
+	            return Application::getInstance();
 	        }
-	        return Container::getInstance()->make($abstract, $parameters);
+	        return Application::getInstance()->make($abstract, $parameters);
 	    }
 	    
 	}
