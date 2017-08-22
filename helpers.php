@@ -286,9 +286,9 @@
     
 	    function get_asset( $file ) {
 		    
-		    if( container()->bound('asset.finder') ) {
+		    if( app()->bound('asset.finder') ) {
 		    
-		    	return container('asset.finder')->find( $file );
+		    	return app('asset.finder')->find( $file );
 		    	
 		    } else {
 			    
