@@ -1,12 +1,12 @@
 # wp-kit/utils
 
-A set uf utilities for wp-kit components.
+A set of utilities for wp-kit components.
 
 There is nothing on the branch other than a helper file and composer file for wp-kit components.
 
 ## Installation
 
-From the root of your ```Themosis``` installation or in your ```Composer``` driven theme folder, install ```wp-kit/utils``` using the follow command:
+From the root of your [```Themosis```](http://framework.themosis.com/) installation or in your [```Composer```](https://getcomposer.org/) driven theme folder, install ```wp-kit/utils``` using the follow command:
 
 ```php
 composer require "wp-kit/utils"
