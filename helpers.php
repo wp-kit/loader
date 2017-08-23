@@ -1,7 +1,6 @@
 <?php
 
-	use WPKit\Foundation\Application as WPKit;
-	use Themosis\Foundation\Application as Themosis;
+	
 	use Illuminate\Support\Facades\Input;
 
 	if( ! defined( 'DS' ) ) {
@@ -13,27 +12,6 @@
 	/*----------------------------------------------*\
     	#SERVICE WRAPPERS
     \*----------------------------------------------*/
-
-	if ( ! function_exists('app') ) {
-		
-	    /**
-	     * Helper function to quickly retrieve an instance.
-	     *
-	     * @param null  $abstract   The abstract instance name.
-	     * @param array $parameters
-	     *
-	     * @return mixed
-	     */
-	    function app($abstract = null, array $parameters = [])
-	    {
-		    $app = class_exists(Themosis::class) ? Themosis::class : WPKit::class;
-	        if (is_null($abstract)) {
-	            return $app::getInstance();
-	        }
-	        return $app::getInstance()->make($abstract, $parameters);
-	    }
-	    
-	}
 
 	if ( ! function_exists('session') ) {
 		
