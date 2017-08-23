@@ -1,6 +1,7 @@
 <?php
 
-	use WPKit\Foundation\Application;
+	use WPKit\Foundation\Application as WPKit;
+	use Themosis\Foundation\Application as Themosis;
 	use Illuminate\Support\Facades\Input;
 
 	if( ! defined( 'DS' ) ) {
@@ -25,10 +26,11 @@
 	     */
 	    function app($abstract = null, array $parameters = [])
 	    {
+		    $app = class_exists(Themosis::class) ? Themosis::class : WPKit::class;
 	        if (is_null($abstract)) {
-	            return Application::getInstance();
+	            return $app::getInstance();
 	        }
-	        return Application::getInstance()->make($abstract, $parameters);
+	        return $app::getInstance()->make($abstract, $parameters);
 	    }
 	    
 	}
