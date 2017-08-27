@@ -1,6 +1,6 @@
 {
 	"name": "wp-kit/utils",
-	"description": "A set of utilities for WPKit components",
+	"description": "A set of utilities for wp-kit components",
 	"keywords": ["wordpress", "framework", "oop", "wp kit", "themosis"],
 	"homepage" : "https://github.com/wp-kit/core",
 	"license": "MIT",
