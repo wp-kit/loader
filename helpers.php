@@ -142,6 +142,34 @@
 		}
 		
 	}
+	
+	if( ! function_exists( 'posttype_path' ) ) {
+		
+		/**
+	     * Gets the posttypes path
+	     *
+	     * @return string
+	     */
+		function posttype_path( $file = '' ) 
+		{
+			return resources_path('posttypes', $file);
+		}
+		
+	}
+	
+	if( ! function_exists( 'taxonomy_path' ) ) {
+		
+		/**
+	     * Gets the taxonomies path
+	     *
+	     * @return string
+	     */
+		function taxonomy_path( $file = '' ) 
+		{
+			return resources_path('taxonomies', $file);
+		}
+		
+	}
 
 	/*----------------------------------------------*\
 		#IS WP_LOGIN
