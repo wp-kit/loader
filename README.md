@@ -2,7 +2,7 @@
 
 A set of utilities for wp-kit components.
 
-There is nothing on the branch other than a helper file and composer file for wp-kit components.
+There is nothing on the branch other than a helper file for wp-kit components.
 
 ## Installation
 
