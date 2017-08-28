@@ -12,6 +12,8 @@ From the root of your [```Themosis```](http://framework.themosis.com/) installat
 composer require "wp-kit/utils"
 ```
 
+## Commands
+
 ## Requirements
 
 Wordpress 4+
