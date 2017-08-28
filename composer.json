@@ -20,7 +20,7 @@
 	"autoload": {
         "files": [
             "helpers.php",
-            "commands/*.php"
+            "commands/wp-cli-themosis-vendor-publish.php.php"
         ]
     }
 }
