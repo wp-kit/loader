@@ -5,6 +5,11 @@
 
 	if( ! defined( 'DS' ) ) {
 		
+		/**
+	     * Define DS path for general use
+	     *
+	     * @var string
+	     */
 		define( 'DS', DIRECTORY_SEPARATOR );
 		
 	}
@@ -177,9 +182,14 @@
 
     if ( ! function_exists('is_wp_login') ) {
 
+		/**
+	     * Is current url wp login page
+	     *
+	     * @return boolean
+	     */
 	    function is_wp_login() {
 
-		return in_array( $GLOBALS['pagenow'], array( 'wp-login.php', 'wp-register.php', 'wp-activate.php', 'wp-signup.php' ) );
+			return in_array( $GLOBALS['pagenow'], array( 'wp-login.php', 'wp-register.php', 'wp-activate.php', 'wp-signup.php' ) );
 
 	    }
 
@@ -191,6 +201,11 @@
 	
 	if( ! function_exists('get_current_url') ) {
 		
+		/**
+	     * Get current url from request
+	     *
+	     * @return string
+	     */
 		function get_current_url() {
 			
 			return get_home_url( 1, Input::getRequestUri() );
@@ -201,6 +216,11 @@
 	
 	if( ! function_exists('get_current_url_path') ) {
 		
+		/**
+	     * Get current url path from request
+	     *
+	     * @return string
+	     */
 		function get_current_url_path() {
 			
 			return rtrim( explode('?', get_current_url())[0], '/');
@@ -211,6 +231,11 @@
 	
 	if ( ! function_exists('is_route') ) {
     
+    	/**
+	     * Compare current route to route from string
+	     *
+	     * @return boolean
+	     */
 	    function is_route( $path ) {
 		    
 		    if( strpos( $path, '*' ) !== false ) {
@@ -234,6 +259,11 @@
 	
 	if ( ! function_exists('icon') ) {
 	
+		/**
+	     * Get an svg html element from a string
+	     *
+	     * @return string/void
+	     */
 		function icon($name, $css = '', $echo = true) {
 			
 			$icon = "<svg " . ( $css ? "class='$css'" : '' ) . "><use xlink:href='" . get_asset( "/images/icons.svg" ) . "#icon-$name'></use></svg>";
@@ -258,6 +288,11 @@
     
     if ( ! function_exists('nice') ) {
      
+     	/**
+	     * Retrive nice json format from string
+	     *
+	     * @return string/void
+	     */
 	    function nice($content, $echo = true) {
 		    
 		    ob_start();
@@ -292,6 +327,11 @@
     
     if ( ! function_exists('get_asset') ) {
     
+    	/**
+	     * Get an asset path from string
+	     *
+	     * @return string
+	     */
 	    function get_asset( $file ) {
 		    
 		    if( app()->bound('asset.finder') ) {
@@ -320,6 +360,11 @@
     
     if ( ! function_exists('the_asset') ) {
     
+    	/**
+	     * Output an asset path from string
+	     *
+	     * @return void
+	     */
 	    function the_asset( $file ) {
 	        
 	        if( $asset = get_asset( $file ) ) {
