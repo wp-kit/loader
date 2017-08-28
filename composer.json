@@ -19,7 +19,8 @@
 	"type": "library",
 	"autoload": {
         "files": [
-            "helpers.php"
+            "helpers.php",
+            "commands/*.php"
         ]
     }
 }
