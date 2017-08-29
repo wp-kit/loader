@@ -16,11 +16,13 @@ class Themosis_Vendor_Command extends WP_CLI_Command
      *
      * @return void
      */
-	public function publish($args, $assoc_args) {
-		
+	public function publish($args, $options) {
+
 		$this->files = new Filesystem();
+		$this->options = $options;
+		$tags = $this->getOption('tag') ?: [null];
+		$tags = is_array($tags) ? $tags : [$tags];
 		
-		$tags = $this->option('tag') ?: [null];
         foreach ((array) $tags as $tag) {
             $this->publishTag($tag);
         }
@@ -33,6 +35,13 @@ class Themosis_Vendor_Command extends WP_CLI_Command
      * @var \Illuminate\Filesystem\Filesystem
      */
     protected $files;
+    
+    /**
+     * Array of options
+     *
+     * @var array
+     */
+    protected $options;
     
     /**
      * The console command signature.
@@ -51,6 +60,17 @@ class Themosis_Vendor_Command extends WP_CLI_Command
     protected $description = 'Publish any publishable assets from vendor packages';
     
     /**
+     * Get an options
+     *
+     * @param  string  $option
+     * @return string
+     */
+    protected function getOption($option)
+    {
+        return ! empty( $this->options[$option] ) ? $this->options[$option] : null;
+    }
+    
+    /**
      * Publishes the assets for a tag.
      *
      * @param  string  $tag
@@ -61,7 +81,7 @@ class Themosis_Vendor_Command extends WP_CLI_Command
         foreach ($this->pathsToPublish($tag) as $from => $to) {
             $this->publishItem($from, $to);
         }
-        WP_CLI::info('Publishing complete.');
+        WP_CLI::success('Publishing complete.');
     }
     
     /**
@@ -73,7 +93,7 @@ class Themosis_Vendor_Command extends WP_CLI_Command
     protected function pathsToPublish($tag)
     {
         return ServiceProvider::pathsToPublish(
-            $this->option('provider'), $tag
+            $this->getOption('provider'), $tag
         );
     }
     
@@ -103,7 +123,7 @@ class Themosis_Vendor_Command extends WP_CLI_Command
      */
     protected function publishFile($from, $to)
     {
-        if (! $this->files->exists($to) || $this->option('force')) {
+        if (! $this->files->exists($to) || $this->getOption('force')) {
             $this->createParentDirectory(dirname($to));
             $this->files->copy($from, $to);
             $this->status($from, $to, 'File');
@@ -135,7 +155,7 @@ class Themosis_Vendor_Command extends WP_CLI_Command
     protected function moveManagedFiles($manager)
     {
         foreach ($manager->listContents('from://', true) as $file) {
-            if ($file['type'] === 'file' && (! $manager->has('to://'.$file['path']) || $this->option('force'))) {
+            if ($file['type'] === 'file' && (! $manager->has('to://'.$file['path']) || $this->getOption('force'))) {
                 $manager->put('to://'.$file['path'], $manager->read('from://'.$file['path']));
             }
         }
@@ -171,4 +191,4 @@ class Themosis_Vendor_Command extends WP_CLI_Command
 	
 }
 
-WP_CLI::add_command( 'kit publish', [new Themosis_Vendor_Command(), 'publish'] );
+WP_CLI::add_command( 'kit vendor:publish', [new Themosis_Vendor_Command(), 'publish'] );
