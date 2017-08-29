@@ -18,7 +18,7 @@ composer require "wp-kit/utils"
 
 To use the vendor publish command in it's simplest form, use the below command:
 
-````wp kit vendor:publish```
+```wp kit vendor:publish```
 
 Here is a below synopsis:
 
