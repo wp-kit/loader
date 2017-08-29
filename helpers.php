@@ -82,7 +82,7 @@
 		    } else {
 			    $root = get_stylesheet_directory() . DS . 'resources';
 		    }
-		    return $root . ( $path ? DS . $path : '' ) . ltrim( ( $file ? DS . $file : '' ), DS );
+		    return $root . ( $path ? DS . $path : '' ) . DS . ltrim( ( $file ? DS . $file : '' ), DS );
 	    }
 	    
 	}
