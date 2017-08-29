@@ -18,13 +18,13 @@ composer require "wp-kit/utils"
 
 To use the vendor publish command in it's simplest form, use the below command:
 
-```
+```php
 wp kit vendor:publish
 ```
 
 Here is a below synopsis:
 
-```
+```php
 wp kit vendor:publish [--tag=<tag>] [--provider=<provider>] [--force=<force>
 
 OPTIONS
