@@ -14,6 +14,32 @@ composer require "wp-kit/utils"
 
 ## Commands
 
+### Vendor Publish
+
+To use the vendor publish command in it's simplest form, use the below command:
+
+````wp kit vendor:publish```
+
+Here is a below synopsis:
+
+```
+wp kit vendor:publish [--tag=<tag>] [--provider=<provider>] [--force=<force>
+
+OPTIONS
+
+[--tag=<tag>]
+  One or many tags that have assets you want to publish.
+
+[--provider=<provider>]
+  The service provider that has assets you want to publish.
+
+[--force=<force>]
+  Overwrite any existing files.
+  ---
+  default: false
+  ---
+```
+
 ## Requirements
 
 Wordpress 4+
