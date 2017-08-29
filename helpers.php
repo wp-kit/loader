@@ -340,9 +340,9 @@
 		    	
 		    } else {
 			    
-			    if( file_exists( get_stylesheet_directory() . DS . $dir . DS . $file ) ) {
+			    if( file_exists( get_stylesheet_directory() . DS . $file ) ) {
 	                
-	                return get_stylesheet_directory_uri() . DS . $dir . DS . $file;
+	                return get_stylesheet_directory_uri() . DS . $file;
 	                
 	            }
 			    
