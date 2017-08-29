@@ -2,13 +2,9 @@
 	
 if ( !defined( 'WP_CLI' ) ) return;
 
-use League\Flysystem\MountManager;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
-use League\Flysystem\Filesystem as Flysystem;
-use League\Flysystem\Adapter\Local as LocalAdapter;
 
-class Themosis_Vendor_Command extends WP_CLI_Command
+class WPKit_Vendor_Publish extends WP_CLI_Command
 {
 	
 	/**
@@ -18,7 +14,6 @@ class Themosis_Vendor_Command extends WP_CLI_Command
      */
 	public function publish($args, $options) {
 
-		$this->files = new Filesystem();
 		$this->options = $options;
 		$tags = $this->getOption('tag') ?: [null];
 		$tags = is_array($tags) ? $tags : [$tags];
@@ -41,23 +36,7 @@ class Themosis_Vendor_Command extends WP_CLI_Command
      *
      * @var array
      */
-    protected $options;
-    
-    /**
-     * The console command signature.
-     *
-     * @var string
-     */
-    protected $signature = 'vendor:publish {--force : Overwrite any existing files.}
-                    {--provider= : The service provider that has assets you want to publish.}
-                    {--tag=* : One or many tags that have assets you want to publish.}';
-                    
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Publish any publishable assets from vendor packages';
+    protected $options;   
     
     /**
      * Get an options
@@ -106,9 +85,9 @@ class Themosis_Vendor_Command extends WP_CLI_Command
      */
     protected function publishItem($from, $to)
     {
-        if ($this->files->isFile($from)) {
+        if (is_file($from)) {
             return $this->publishFile($from, $to);
-        } elseif ($this->files->isDirectory($from)) {
+        } elseif (is_dir($from)) {
             return $this->publishDirectory($from, $to);
         }
         WP_CLI::error("Can't locate path: <{$from}>");
@@ -123,9 +102,9 @@ class Themosis_Vendor_Command extends WP_CLI_Command
      */
     protected function publishFile($from, $to)
     {
-        if (! $this->files->exists($to) || $this->getOption('force')) {
+        if (! file_exists($to) || $this->getOption('force')) {
             $this->createParentDirectory(dirname($to));
-            $this->files->copy($from, $to);
+            copy($from, $to);
             $this->status($from, $to, 'File');
         }
     }
@@ -133,32 +112,26 @@ class Themosis_Vendor_Command extends WP_CLI_Command
     /**
      * Publish the directory to the given directory.
      *
-     * @param  string  $from
-     * @param  string  $to
+     * @param  string  $src
+     * @param  string  $dst
      * @return void
      */
-    protected function publishDirectory($from, $to)
+    protected function publishDirectory($src, $dst)
     {
-        $this->moveManagedFiles(new MountManager([
-            'from' => new Flysystem(new LocalAdapter($from)),
-            'to' => new Flysystem(new LocalAdapter($to)),
-        ]));
+        $dir = opendir($src); 
+	    @mkdir($dst); 
+	    while(false !== ( $file = readdir($dir)) ) { 
+	        if (( $file != '.' ) && ( $file != '..' )) { 
+	            if ( is_dir($src . '/' . $file) ) { 
+	                $this->publishDirectory($src . '/' . $file,$dst . '/' . $file); 
+	            } 
+	            else { 
+	                copy($src . '/' . $file,$dst . '/' . $file); 
+	            } 
+	        } 
+	    } 
+	    closedir($dir); 
         $this->status($from, $to, 'Directory');
-    }
-    
-    /**
-     * Move all the files in the given MountManager.
-     *
-     * @param  \League\Flysystem\MountManager  $manager
-     * @return void
-     */
-    protected function moveManagedFiles($manager)
-    {
-        foreach ($manager->listContents('from://', true) as $file) {
-            if ($file['type'] === 'file' && (! $manager->has('to://'.$file['path']) || $this->getOption('force'))) {
-                $manager->put('to://'.$file['path'], $manager->read('from://'.$file['path']));
-            }
-        }
     }
     
     /**
@@ -169,8 +142,8 @@ class Themosis_Vendor_Command extends WP_CLI_Command
      */
     protected function createParentDirectory($directory)
     {
-        if (! $this->files->isDirectory($directory)) {
-            $this->files->makeDirectory($directory, 0755, true);
+        if (! is_dir($directory)) {
+            mkdir($directory, 0755, true);
         }
     }
     
@@ -184,11 +157,34 @@ class Themosis_Vendor_Command extends WP_CLI_Command
      */
     protected function status($from, $to, $type)
     {
-        $from = str_replace(base_path(), '', realpath($from));
-        $to = str_replace(base_path(), '', realpath($to));
-        WP_CLI::success('<info>Copied '.$type.'</info> <comment>['.$from.']</comment> <info>To</info> <comment>['.$to.']</comment>');
+        WP_CLI::success('Copied '.$type.' from ['.$from.'] to ['.$to.']');
     }
 	
 }
 
-WP_CLI::add_command( 'kit vendor:publish', [new Themosis_Vendor_Command(), 'publish'] );
+WP_CLI::add_command( 'kit vendor:publish', [new WPKit_Vendor_Publish(), 'publish'], array(
+    'shortdesc' => 'Publish any publishable assets from vendor packages.',
+    'synopsis' => array(
+        array(
+            'type'     => 'assoc',
+            'name'     => 'tag',
+            'optional' => true,
+            'default'  => null,
+            'description' => 'One or many tags that have assets you want to publish.'
+        ),
+        array(
+            'type'     => 'assoc',
+            'name'     => 'provider',
+            'optional' => true,
+            'default'  => null,
+            'description' => 'The service provider that has assets you want to publish.'
+        ),
+        array(
+            'type'     => 'assoc',
+            'name'     => 'force',
+            'optional' => true,
+            'default'  => false,
+            'description' => 'Overwrite any existing files.'
+        )
+    )
+) );

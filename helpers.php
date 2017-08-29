@@ -80,9 +80,9 @@
 		    if( function_exists('themosis_path') ) {
 			    $root = themosis_path('theme.resources');
 		    } else {
-			    $root = get_stylesheet_directory() . DS . 'resources';
+			    $root = get_stylesheet_directory() . DS . 'resources' . DS;
 		    }
-		    return $root . ( $path ? DS . $path : '' ) . DS . ltrim( ( $file ? DS . $file : '' ), DS );
+		    return $root . ( $path ? $path : '' ) . DS . ltrim( ( $file ? DS . $file : '' ), DS );
 	    }
 	    
 	}
