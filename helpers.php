@@ -400,16 +400,6 @@
 		}
 		
 	}
-	
-	if ( ! function_exists('hook') ) {
-	
-		function hook() {
-			
-			call_user_func_array('WPKit\Utils\Facades\Hook::' . __FUNCTION__, func_get_args());	
-			
-		}
-		
-	}
 
 
 ?>
