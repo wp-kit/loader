@@ -4,25 +4,31 @@
 	
 	class HookManager {
 		
-		public function action() {
+		public function action() {	
 			
-			call_user_func_array(__NAMESPACE__ .'\hook', array_merge([__FUNCTION__], func_get_args()));	
+			call_user_func_array(__CLASS__ .'::hook', array_merge([__FUNCTION__], func_get_args()));	
 				
 		}
 		
 		public function filter() {
 			
-			call_user_func_array(__NAMESPACE__ .'\hook', array_merge([__FUNCTION__], func_get_args()));		
+			call_user_func_array(__CLASS__ .'::hook', array_merge([__FUNCTION__], func_get_args()));		
 			
 		}
 		
-		public function hook( $type, $hook, $callback ) {
+		protected function hook( $type, $hook, $callback ) {
 			
 			$trace = debug_backtrace();
 			
 			if( ! is_callable( $callback ) ) {
 				
-				foreach(range(1, 3) as $i) {
+				/*
+					3 = using app() alias
+					4 = using Hook facade
+					5 = using helper function
+				*/
+				
+				foreach(range(3, 5) as $i) {
 					
 					if( ! empty( $trace[$i]['object'] ) ) {
 						
