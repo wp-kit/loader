@@ -17,7 +17,8 @@
 	},
 	"require": {
         "php": ">=5.6.4",
-        "illuminate/support": "5.*"
+        "illuminate/support": "5.*",
+		"peterhegman/wp-laravel-dd": "dev-master"
     },
 	"type": "library",
 	"autoload": {
