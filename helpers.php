@@ -401,5 +401,21 @@
 		
 	}
 
-
+	if (! function_exists('dump')) {
+	    /**
+	     * Dump the passed variables and end the script.
+	     *
+	     * @param  mixed
+	     * @return void
+	     */
+	    function dump()
+	    {
+	        array_map(function ($x) {
+	            (new PeterHegman\Dumper)->dump($x);
+	        }, func_get_args());
+	
+	        die(1);
+	    }
+	}
+	
 ?>
