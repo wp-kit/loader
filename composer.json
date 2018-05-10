@@ -21,6 +21,9 @@
     },
 	"type": "library",
 	"autoload": {
+		"psr-4": {
+            "WPKit\\Utils\\": "src/Utils" 
+        },
         "files": [
             "helpers.php",
             "commands/wp-cli-vendor-publish.php"
